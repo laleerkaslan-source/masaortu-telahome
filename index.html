@@ -1292,185 +1292,279 @@
   <script>
     // ─── PRODUCTS DATA ───
     const products = [
+      // ── JAKARLI ──
       {
-        id: 'frida-160x220',
-        name: 'Frida 160x220',
+        id: 'frida-160x220', name: 'Frida 160x220',
         desc: 'Jakarlı dokuma, zarif çiçek deseni. 160x220 cm sofra masa örtüsü.',
-        price: 2049,
-        image: 'https://fiskosteks.sercdn.com/resimler/med_FRIDA-MASA-ORTUSU-160X220-69c0deec9c96b_png.webp',
-        category: 'jakarli',
-        stock: 20
+        price: 2049, image: 'https://fiskosteks.sercdn.com/resimler/med_FRIDA-MASA-ORTUSU-160X220-69c0deec9c96b_png.webp',
+        category: 'jakarli', stock: 20
       },
       {
-        id: 'frida-160x260',
-        name: 'Frida 160x260',
+        id: 'frida-160x260', name: 'Frida 160x260',
         desc: 'Jakarlı dokuma, zarif çiçek deseni. 160x260 cm büyük boy masa örtüsü.',
-        price: 2295,
-        image: 'https://fiskosteks.sercdn.com/resimler/med_FRIDA-MASA-ORTUSU-160X260-69c0deef2056e_png.webp',
-        category: 'jakarli',
-        stock: 20
+        price: 2295, image: 'https://fiskosteks.sercdn.com/resimler/med_FRIDA-MASA-ORTUSU-160X260-69c0deef2056e_png.webp',
+        category: 'jakarli', stock: 20
       },
       {
-        id: 'selena2-160x220',
-        name: 'Selena-2 160x220',
+        id: 'selena2-160x220', name: 'Selena-2 160x220',
         desc: 'Jakarlı dokuma, klasik desen. 160x220 cm sofra masa örtüsü.',
-        price: 2049,
-        image: 'https://fiskosteks.sercdn.com/resimler/med_SELENA-2-MASA-ORTUSU-160X220-699ef217ccdbc_png.webp',
-        category: 'jakarli',
-        stock: 20
+        price: 2049, image: 'https://fiskosteks.sercdn.com/resimler/med_SELENA-2-MASA-ORTUSU-160X220-699ef217ccdbc_png.webp',
+        category: 'jakarli', stock: 20
       },
       {
-        id: 'selena2-160x260',
-        name: 'Selena-2 160x260',
+        id: 'selena2-160x260', name: 'Selena-2 160x260',
         desc: 'Jakarlı dokuma, klasik desen. 160x260 cm büyük boy masa örtüsü.',
-        price: 2295,
-        image: 'https://fiskosteks.sercdn.com/resimler/med_SELENA-2-MASA-ORTUSU-160X260-699ef1f880d85_png.webp',
-        category: 'jakarli',
-        stock: 20
+        price: 2295, image: 'https://fiskosteks.sercdn.com/resimler/med_SELENA-2-MASA-ORTUSU-160X260-699ef1f880d85_png.webp',
+        category: 'jakarli', stock: 20
       },
       {
-        id: 'manolya-160x220',
-        name: 'Manolya 160x220',
+        id: 'selena2-160x300', name: 'Selena-2 160x300',
+        desc: 'Jakarlı dokuma, klasik desen. 160x300 cm extra büyük boy masa örtüsü.',
+        price: 2543, image: 'https://fiskosteks.sercdn.com/resimler/med_SELENA-2-MASA-ORTUSU-160X300-699ef1ce9c201_png.webp',
+        category: 'jakarli', stock: 20
+      },
+      {
+        id: 'manolya-160x220', name: 'Manolya 160x220',
         desc: 'Jakarlı dokuma, manolya çiçeği deseni. 160x220 cm masa örtüsü.',
-        price: 2049,
-        image: 'https://fiskosteks.sercdn.com/resimler/med_MANOLYA-MASA-ORTUSU-160X220-699ef26abf531_png.webp',
-        category: 'jakarli',
-        stock: 20
+        price: 2049, image: 'https://fiskosteks.sercdn.com/resimler/med_MANOLYA-MASA-ORTUSU-160X220-699ef26abf531_png.webp',
+        category: 'jakarli', stock: 20
       },
       {
-        id: 'manolya-160x260',
-        name: 'Manolya 160x260',
+        id: 'manolya-160x260', name: 'Manolya 160x260',
         desc: 'Jakarlı dokuma, manolya çiçeği deseni. 160x260 cm büyük boy.',
-        price: 2295,
-        image: 'https://fiskosteks.sercdn.com/resimler/med_MANOLYA-MASA-ORTUSU-160X260-699ef257e6404_png.webp',
-        category: 'jakarli',
-        stock: 20
+        price: 2295, image: 'https://fiskosteks.sercdn.com/resimler/med_MANOLYA-MASA-ORTUSU-160X260-699ef257e6404_png.webp',
+        category: 'jakarli', stock: 20
       },
       {
-        id: 'mini-acelya-160x260',
-        name: 'Mini Açelya 160x260',
+        id: 'manolya-160x300', name: 'Manolya 160x300',
+        desc: 'Jakarlı dokuma, manolya çiçeği deseni. 160x300 cm extra büyük boy.',
+        price: 2543, image: 'https://fiskosteks.sercdn.com/resimler/med_MANOLYA-MASA-ORTUSU-160X300-699ef2451bcda_png.webp',
+        category: 'jakarli', stock: 20
+      },
+      {
+        id: 'mini-acelya-160x260', name: 'Mini Açelya 160x260',
         desc: 'Jakarlı dokuma, açelya deseni. 160x260 cm büyük boy masa örtüsü.',
-        price: 2295,
-        image: 'https://fiskosteks.sercdn.com/resimler/med_MINI-ACELYA-MASA-ORTUSU-160x260-699ef3c584583_png.webp',
-        category: 'jakarli',
-        stock: 20
+        price: 2295, image: 'https://fiskosteks.sercdn.com/resimler/med_MINI-ACELYA-MASA-ORTUSU-160x260-699ef3c584583_png.webp',
+        category: 'jakarli', stock: 20
       },
       {
-        id: 'selena-160x220',
-        name: 'Selena 160x220',
+        id: 'mini-acelya-160x300', name: 'Mini Açelya 160x300',
+        desc: 'Jakarlı dokuma, açelya deseni. 160x300 cm extra büyük boy masa örtüsü.',
+        price: 2543, image: 'https://fiskosteks.sercdn.com/resimler/med_MINI-ACELYA-MASA-ORTUSU-699ef27bdbf4f_png.webp',
+        category: 'jakarli', stock: 20
+      },
+      // ── PREMIUM ──
+      {
+        id: 'selena-160x220', name: 'Selena 160x220',
         desc: 'Premium jakarlı, zengin desen detayları. 160x220 cm masa örtüsü.',
-        price: 2599,
-        image: 'https://fiskosteks.sercdn.com/resimler/med_SELENA-MASA-ORTUSU-160X220-69c0dde4dad5c_png.webp',
-        category: 'premium',
-        stock: 20
+        price: 2599, image: 'https://fiskosteks.sercdn.com/resimler/med_SELENA-MASA-ORTUSU-160X220-69c0dde4dad5c_png.webp',
+        category: 'premium', stock: 20
       },
       {
-        id: 'matilda-160x260',
-        name: 'Matilda 160x260',
+        id: 'selena-160x300', name: 'Selena 160x300',
+        desc: 'Premium jakarlı, zengin desen detayları. 160x300 cm extra büyük boy.',
+        price: 3341, image: 'https://fiskosteks.sercdn.com/resimler/med_SELENA-MASA-ORTUSU-160X300-69c0dde90a11b_png.webp',
+        category: 'premium', stock: 20
+      },
+      {
+        id: 'selena-160x350', name: 'Selena 160x350',
+        desc: 'Premium jakarlı, zengin desen detayları. 160x350 cm jumbo boy.',
+        price: 3465, image: 'https://fiskosteks.sercdn.com/resimler/med_SELENA-MASA-ORTUSU-160X350-69c0ddf16dd5e_png.webp',
+        category: 'premium', stock: 20
+      },
+      {
+        id: 'selena-180q', name: 'Selena 180Q (Yuvarlak)',
+        desc: 'Premium jakarlı, zengin desen detayları. 180 cm yuvarlak masa örtüsü.',
+        price: 2351, image: 'https://fiskosteks.sercdn.com/resimler/med_SELENA-MASA-ORTUSU-180Q-69c0ddeba3d12_jpeg.webp',
+        category: 'premium', stock: 20
+      },
+      {
+        id: 'selena-200q', name: 'Selena 200Q (Yuvarlak)',
+        desc: 'Premium jakarlı, zengin desen detayları. 200 cm yuvarlak masa örtüsü.',
+        price: 2543, image: 'https://fiskosteks.sercdn.com/resimler/med_SELENA-MASA-ORTUSU-200Q-69c0ddf2b0cbd_jpeg.webp',
+        category: 'premium', stock: 20
+      },
+      {
+        id: 'matilda-160x260', name: 'Matilda 160x260',
         desc: 'Premium dokuma, şık bordür detayı. 160x260 cm büyük boy.',
-        price: 2599,
-        image: 'https://fiskosteks.sercdn.com/resimler/min_MATILDA-MASA-ORTUSU-160X260-699efdd91d92d_png.webp',
-        category: 'premium',
-        stock: 20
+        price: 2599, image: 'https://fiskosteks.sercdn.com/resimler/min_MATILDA-MASA-ORTUSU-160X260-699efdd91d92d_png.webp',
+        category: 'premium', stock: 20
       },
       {
-        id: 'belinda-160x260',
-        name: 'Belinda 160x260',
+        id: 'belinda-160x260', name: 'Belinda 160x260',
         desc: 'Premium dokuma, zarif tasarım. 160x260 cm büyük boy masa örtüsü.',
-        price: 2475,
-        image: 'https://fiskosteks.sercdn.com/resimler/med_BELINDA-MASA-ORTUSU-160X260-69c0ddfb8ad12_png.webp',
-        category: 'premium',
-        stock: 20
+        price: 2475, image: 'https://fiskosteks.sercdn.com/resimler/med_BELINDA-MASA-ORTUSU-160X260-69c0ddfb8ad12_png.webp',
+        category: 'premium', stock: 20
       },
       {
-        id: 'diva-160x220',
-        name: 'Diva 160x220',
+        id: 'diva-110x160', name: 'Diva 110x160',
+        desc: 'Lüks premium koleksiyon, özel dokuma. 110x160 cm sehpa masa örtüsü.',
+        price: 2171, image: 'https://fiskosteks.sercdn.com/resimler/med_DIVA-MASA-ORTUSU-110x160-69a7f93c012db_png.webp',
+        category: 'premium', stock: 20
+      },
+      {
+        id: 'diva-160x220', name: 'Diva 160x220',
         desc: 'Lüks premium koleksiyon, özel dokuma. 160x220 cm masa örtüsü.',
-        price: 4084,
-        image: 'https://fiskosteks.sercdn.com/resimler/med_DIVA-MASA-ORTUSU-160X220-69a7f93e4ed0c_png.webp',
-        category: 'premium',
-        stock: 20
+        price: 4084, image: 'https://fiskosteks.sercdn.com/resimler/med_DIVA-MASA-ORTUSU-160X220-69a7f93e4ed0c_png.webp',
+        category: 'premium', stock: 20
       },
       {
-        id: 'diva-160x260',
-        name: 'Diva 160x260',
+        id: 'diva-160x260', name: 'Diva 160x260',
         desc: 'Lüks premium koleksiyon, özel dokuma. 160x260 cm büyük boy.',
-        price: 4579,
-        image: 'https://fiskosteks.sercdn.com/resimler/med_DIVA-MASA-ORTUSU-160X260-69a7f939111c1_png.webp',
-        category: 'premium',
-        stock: 20
+        price: 4579, image: 'https://fiskosteks.sercdn.com/resimler/med_DIVA-MASA-ORTUSU-160X260-69a7f939111c1_png.webp',
+        category: 'premium', stock: 20
       },
       {
-        id: 'elisa-160x260',
-        name: 'Elisa 160x260',
+        id: 'diva-160x300', name: 'Diva 160x300',
+        desc: 'Lüks premium koleksiyon, özel dokuma. 160x300 cm extra büyük boy.',
+        price: 5074, image: 'https://fiskosteks.sercdn.com/resimler/med_DIVA-MASA-ORTUSU-160X300-69a7f935e2ed9_png.webp',
+        category: 'premium', stock: 20
+      },
+      {
+        id: 'diva-160x350', name: 'Diva 160x350',
+        desc: 'Lüks premium koleksiyon, özel dokuma. 160x350 cm jumbo boy.',
+        price: 5693, image: 'https://fiskosteks.sercdn.com/resimler/med_DIVA-MASA-ORTUSU-160X350-69a7f93340dad_png.webp',
+        category: 'premium', stock: 20
+      },
+      {
+        id: 'diva-160x400', name: 'Diva 160x400',
+        desc: 'Lüks premium koleksiyon, özel dokuma. 160x400 cm extra jumbo boy.',
+        price: 6188, image: 'https://fiskosteks.sercdn.com/resimler/med_DIVA-MASA-ORTUSU-160X400-69a7f92fb93a6_jpeg.webp',
+        category: 'premium', stock: 20
+      },
+      {
+        id: 'diva-160x450', name: 'Diva 160x450',
+        desc: 'Lüks premium koleksiyon, özel dokuma. 160x450 cm ultra boy.',
+        price: 6806, image: 'https://fiskosteks.sercdn.com/resimler/med_DIVA-MASA-ORTUSU-160X450-69a7f92d6d2df_png.webp',
+        category: 'premium', stock: 20
+      },
+      {
+        id: 'diva-160x500', name: 'Diva 160x500',
+        desc: 'Lüks premium koleksiyon, özel dokuma. 160x500 cm maksimum boy.',
+        price: 7425, image: 'https://fiskosteks.sercdn.com/resimler/med_DIVA-MASA-ORTUSU-160X500-69a7f8fe843cd_png.webp',
+        category: 'premium', stock: 20
+      },
+      {
+        id: 'elisa-160x260', name: 'Elisa 160x260',
         desc: 'Premium dokuma, modern çizgiler. 160x260 cm büyük boy masa örtüsü.',
-        price: 2723,
-        image: 'https://fiskosteks.sercdn.com/resimler/med_ELISA-MASA-ORTUSU-160X260-69a7fa87e80b7_png.webp',
-        category: 'premium',
-        stock: 20
+        price: 2723, image: 'https://fiskosteks.sercdn.com/resimler/med_ELISA-MASA-ORTUSU-160X260-69a7fa87e80b7_png.webp',
+        category: 'premium', stock: 20
       },
       {
-        id: 'lotus-keten-160x220',
-        name: 'Lotus Keten 160x220',
+        id: 'elisa-160x300', name: 'Elisa 160x300',
+        desc: 'Premium dokuma, modern çizgiler. 160x300 cm extra büyük boy.',
+        price: 2970, image: 'https://fiskosteks.sercdn.com/resimler/med_ELISA-MASA-ORTUSU-160X300-69c0e21f0b5a0_png.webp',
+        category: 'premium', stock: 20
+      },
+      {
+        id: 'elisa-160x350', name: 'Elisa 160x350',
+        desc: 'Premium dokuma, modern çizgiler. 160x350 cm jumbo boy.',
+        price: 3038, image: 'https://fiskosteks.sercdn.com/resimler/med_ELISA-MASA-ORTUSU-160X350-69c0dcd2ba6ad_png.webp',
+        category: 'premium', stock: 20
+      },
+      {
+        id: 'elisa-160x500', name: 'Elisa 160x500',
+        desc: 'Premium dokuma, modern çizgiler. 160x500 cm maksimum boy.',
+        price: 4084, image: 'https://fiskosteks.sercdn.com/resimler/med_ELISA-MASA-ORTUSU-160X500-69c0dcd839bbd_png.webp',
+        category: 'premium', stock: 20
+      },
+      // ── KETEN ──
+      {
+        id: 'lotus-keten-160x220', name: 'Lotus Keten 160x220',
         desc: 'Doğal keten kumaş, lotus deseni. 160x220 cm masa örtüsü.',
-        price: 2599,
-        image: 'https://fiskosteks.sercdn.com/resimler/med_LOTUS-KETEN-MASA-ORTUSU-69c0dd775538f_png.webp',
-        category: 'keten',
-        stock: 20
+        price: 2599, image: 'https://fiskosteks.sercdn.com/resimler/med_LOTUS-KETEN-MASA-ORTUSU-69c0dd775538f_png.webp',
+        category: 'keten', stock: 20
       },
       {
-        id: 'lotus-keten-160x260',
-        name: 'Lotus Keten 160x260',
+        id: 'lotus-keten-160x260', name: 'Lotus Keten 160x260',
         desc: 'Doğal keten kumaş, lotus deseni. 160x260 cm büyük boy.',
-        price: 2914,
-        image: 'https://fiskosteks.sercdn.com/resimler/med_LOTUS-KETEN-MASA-ORTUSU-69c0dd76cb0f0_png.webp',
-        category: 'keten',
-        stock: 20
+        price: 2914, image: 'https://fiskosteks.sercdn.com/resimler/med_LOTUS-KETEN-MASA-ORTUSU-69c0dd76cb0f0_png.webp',
+        category: 'keten', stock: 20
       },
       {
-        id: 'colber-keten-160x220',
-        name: 'Colber Keten 160x220',
+        id: 'lotus-keten-160x300', name: 'Lotus Keten 160x300',
+        desc: 'Doğal keten kumaş, lotus deseni. 160x300 cm extra büyük boy.',
+        price: 3218, image: 'https://fiskosteks.sercdn.com/resimler/med_LOTUS-KETEN-MASA-ORTUSU-69c0dd7d0a7b7_png.webp',
+        category: 'keten', stock: 20
+      },
+      {
+        id: 'lotus-keten-160x350', name: 'Lotus Keten 160x350',
+        desc: 'Doğal keten kumaş, lotus deseni. 160x350 cm jumbo boy.',
+        price: 3589, image: 'https://fiskosteks.sercdn.com/resimler/med_LOTUS-KETEN-MASA-ORTUSU-69a7f99b99e2d_png.webp',
+        category: 'keten', stock: 20
+      },
+      {
+        id: 'lotus-keten-160x400', name: 'Lotus Keten 160x400',
+        desc: 'Doğal keten kumaş, lotus deseni. 160x400 cm extra jumbo boy.',
+        price: 4703, image: 'https://fiskosteks.sercdn.com/resimler/med_LOTUS-KETEN-MASA-ORTUSU-69c0dd7f445a2_png.webp',
+        category: 'keten', stock: 20
+      },
+      {
+        id: 'colber-keten-160x220', name: 'Colber Keten 160x220',
         desc: 'Doğal keten kumaş, sade şıklık. 160x220 cm masa örtüsü.',
-        price: 1609,
-        image: 'https://fiskosteks.sercdn.com/resimler/med_COLBER-KETEN-MASA-ORTUSU-69a7f9d4ca4b4_png.webp',
-        category: 'keten',
-        stock: 20
+        price: 1609, image: 'https://fiskosteks.sercdn.com/resimler/med_COLBER-KETEN-MASA-ORTUSU-69a7f9d4ca4b4_png.webp',
+        category: 'keten', stock: 20
       },
       {
-        id: 'colber-keten-160x260',
-        name: 'Colber Keten 160x260',
+        id: 'colber-keten-160x260', name: 'Colber Keten 160x260',
         desc: 'Doğal keten kumaş, sade şıklık. 160x260 cm büyük boy.',
-        price: 1856,
-        image: 'https://fiskosteks.sercdn.com/resimler/med_COLBER-KETEN-MASA-ORTUSU-69c0dd19ee478_png.webp',
-        category: 'keten',
-        stock: 20
+        price: 1856, image: 'https://fiskosteks.sercdn.com/resimler/med_COLBER-KETEN-MASA-ORTUSU-69c0dd19ee478_png.webp',
+        category: 'keten', stock: 20
       },
       {
-        id: 'angel-keten-160x220',
-        name: 'Angel Keten 160x220',
+        id: 'colber-keten-160x300', name: 'Colber Keten 160x300',
+        desc: 'Doğal keten kumaş, sade şıklık. 160x300 cm extra büyük boy.',
+        price: 2104, image: 'https://fiskosteks.sercdn.com/resimler/med_COLBER-KETEN-MASA-ORTUSU-69c0dd1be719e_png.webp',
+        category: 'keten', stock: 20
+      },
+      {
+        id: 'colber-keten-160x350', name: 'Colber Keten 160x350',
+        desc: 'Doğal keten kumaş, sade şıklık. 160x350 cm jumbo boy.',
+        price: 2351, image: 'https://fiskosteks.sercdn.com/resimler/med_COLBER-KETEN-MASA-ORTUSU-69c0dd1e2acd3_png.webp',
+        category: 'keten', stock: 20
+      },
+      {
+        id: 'angel-keten-160x220', name: 'Angel Keten 160x220',
         desc: 'Premium keten kumaş, angel deseni. 160x220 cm masa örtüsü.',
-        price: 2846,
-        image: 'https://fiskosteks.sercdn.com/resimler/med_ANGEL-KETEN-MASA-ORTUSU-69a7faab817f2_png.webp',
-        category: 'keten',
-        stock: 20
+        price: 2846, image: 'https://fiskosteks.sercdn.com/resimler/med_ANGEL-KETEN-MASA-ORTUSU-69a7faab817f2_png.webp',
+        category: 'keten', stock: 20
       },
       {
-        id: 'yakut-pano',
-        name: 'Yakut Pano',
+        id: 'angel-keten-160x260', name: 'Angel Keten 160x260',
+        desc: 'Premium keten kumaş, angel deseni. 160x260 cm büyük boy.',
+        price: 3589, image: 'https://fiskosteks.sercdn.com/resimler/med_ANGEL-KETEN-MASA-ORTUSU-69a7faa9483af_png.webp',
+        category: 'keten', stock: 20
+      },
+      {
+        id: 'angel-keten-160x300', name: 'Angel Keten 160x300',
+        desc: 'Premium keten kumaş, angel deseni. 160x300 cm extra büyük boy.',
+        price: 3218, image: 'https://fiskosteks.sercdn.com/resimler/med_ANGEL-KETEN-MASA-ORTUSU-69a7faa6698b8_png.webp',
+        category: 'keten', stock: 20
+      },
+      {
+        id: 'angel-keten-160x350', name: 'Angel Keten 160x350',
+        desc: 'Premium keten kumaş, angel deseni. 160x350 cm jumbo boy.',
+        price: 4028, image: 'https://fiskosteks.sercdn.com/resimler/med_ANGEL-KETEN-MASA-ORTUSU-69a7fa9f08e7f_png.webp',
+        category: 'keten', stock: 20
+      },
+      {
+        id: 'angel-keten-160x400', name: 'Angel Keten 160x400',
+        desc: 'Premium keten kumaş, angel deseni. 160x400 cm extra jumbo boy.',
+        price: 4455, image: 'https://fiskosteks.sercdn.com/resimler/med_ANGEL-KETEN-MASA-ORTUSU-69a7fa9b317fc_png.webp',
+        category: 'keten', stock: 20
+      },
+      // ── PANO ──
+      {
+        id: 'yakut-pano', name: 'Yakut Pano',
         desc: 'Pano desen, renkli çiçek motifi. Tek boy masa örtüsü.',
-        price: 810,
-        image: 'https://fiskosteks.sercdn.com/resimler/med_YAKUT-PANO-MASA-ORTUSU-69cd2fdfa5549_png.webp',
-        category: 'pano',
-        stock: 20
+        price: 810, image: 'https://fiskosteks.sercdn.com/resimler/med_YAKUT-PANO-MASA-ORTUSU-69cd2fdfa5549_png.webp',
+        category: 'pano', stock: 20
       },
       {
-        id: 'elit-pano',
-        name: 'Elit Pano',
+        id: 'elit-pano', name: 'Elit Pano',
         desc: 'Pano desen, şık motifler. Tek boy masa örtüsü.',
-        price: 867,
-        image: 'https://fiskosteks.sercdn.com/resimler/min_ELIT-PANO-MASA-ORTUSU-69a7f970a9026_png.webp',
-        category: 'pano',
-        stock: 20
+        price: 867, image: 'https://fiskosteks.sercdn.com/resimler/min_ELIT-PANO-MASA-ORTUSU-69a7f970a9026_png.webp',
+        category: 'pano', stock: 20
       }
     ];
 
