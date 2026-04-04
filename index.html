@@ -17,6 +17,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <script src="https://telahome.store/shared-cart.js"></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -1382,8 +1383,8 @@
       { id: 'elit-pano', name: 'Elit Pano', size: 'tek', desc: 'Pano desen, şık motifler.', price: 867, image: 'https://fiskosteks.sercdn.com/resimler/min_ELIT-PANO-MASA-ORTUSU-69a7f970a9026_png.webp', category: 'pano', stock: 20 }
     ];
 
-    // ─── CART STATE ───
-    let cart = JSON.parse(localStorage.getItem('masaortuCart') || '[]');
+    // ─── CART STATE (shared across all telahome.store subdomains) ───
+    let cart = []; // Full items: [{id, name, price, image, qty, size, source}]
     let activeFilter = 'all';
     let activeSize = 'all';
 
@@ -1426,7 +1427,7 @@
       grid.innerHTML = filtered.length === 0
         ? '<p style="text-align:center;grid-column:1/-1;padding:40px 0;color:var(--gray);">Bu filtrelere uygun ürün bulunamadı.</p>'
         : filtered.map(p => {
-        const inCart = cart.find(c => c.id === p.id);
+        const inCart = cart.find(c => c.id === p.id && c.source === 'masaortu');
         const cartQty = inCart ? inCart.qty : 0;
         const remaining = p.stock - cartQty;
         const stockLabel = remaining <= 0 ? 'Tükendi' : 'Stokta';
@@ -1458,40 +1459,43 @@
       initObserver();
     }
 
-    // ─── CART FUNCTIONS ───
+    // ─── CART FUNCTIONS (SharedCart bridge) ───
     function addToCart(id) {
-      const product = products.find(p => p.id === id);
-      const inCart = cart.find(c => c.id === id);
+      const p = products.find(pr => pr.id === id);
+      const inCart = cart.find(c => c.id === id && c.source === 'masaortu');
       const currentQty = inCart ? inCart.qty : 0;
+      if (currentQty >= p.stock) return;
 
-      if (currentQty >= product.stock) return;
+      const sizeLabel = p.size === 'tek' ? 'Tek Ebat' : p.size.includes('Q') ? p.size.replace('Q', ' Yuvarlak') : p.size.replace('x', '×') + ' cm';
 
       if (inCart) {
         inCart.qty++;
+        SharedCart.updateItem(id, 'masaortu', inCart.qty);
       } else {
-        cart.push({ id, qty: 1 });
+        const item = { id: p.id, name: p.name + ' ' + sizeLabel, price: p.price, image: p.image, qty: 1, size: sizeLabel, source: 'masaortu' };
+        cart.push(item);
+        SharedCart.addItem(item);
       }
 
-      saveCart();
+      updateBadge();
       renderProducts();
       renderCart();
-      showToast(product.name + ' sepete eklendi!');
+      showToast(p.name + ' sepete eklendi!');
     }
 
-    function updateQty(id, delta) {
-      const item = cart.find(c => c.id === id);
+    function updateQty(id, source, delta) {
+      const item = cart.find(c => c.id === id && c.source === source);
       if (!item) return;
 
-      const product = products.find(p => p.id === id);
       item.qty += delta;
-
       if (item.qty <= 0) {
-        cart = cart.filter(c => c.id !== id);
-      } else if (item.qty > product.stock) {
-        item.qty = product.stock;
+        cart = cart.filter(c => !(c.id === id && c.source === source));
+        SharedCart.removeItem(id, source);
+      } else {
+        SharedCart.updateItem(id, source, item.qty);
       }
 
-      saveCart();
+      updateBadge();
       renderProducts();
       renderCart();
     }
@@ -1499,19 +1503,21 @@
     function clearCart() {
       if (!confirm('Sepeti boşaltmak istediğinize emin misiniz?')) return;
       cart = [];
-      saveCart();
+      SharedCart.clear();
+      updateBadge();
       renderProducts();
       renderCart();
       showToast('Sepet boşaltıldı');
     }
 
-    function saveCart() {
-      localStorage.setItem('masaortuCart', JSON.stringify(cart));
+    function updateBadge() {
       const total = cart.reduce((s, c) => s + c.qty, 0);
       const badge = document.getElementById('cartCount');
       badge.textContent = total;
       badge.classList.toggle('show', total > 0);
     }
+
+    const sourceLabels = { masaortu: 'Masa Örtüsü', punch: 'Kırlent', alez: 'Alez' };
 
     function renderCart() {
       const itemsEl = document.getElementById('cartItems');
@@ -1532,19 +1538,19 @@
       let total = 0;
 
       cart.forEach(c => {
-        const p = products.find(pr => pr.id === c.id);
-        total += p.price * c.qty;
+        total += (c.price || 0) * c.qty;
+        const sourceTag = c.source && c.source !== 'masaortu' ? `<span style="font-size:0.7rem;background:var(--earth-light,#e8ddd0);color:var(--earth);padding:1px 6px;border-radius:3px;">${sourceLabels[c.source] || c.source}</span>` : '';
         html += `
           <div class="cart-item">
-            <img src="${p.image}" alt="${p.name}">
+            <img src="${c.image || ''}" alt="${c.name}" onerror="this.style.display='none'">
             <div class="cart-item-info">
-              <div class="cart-item-name">${p.name}</div>
-              <div class="cart-item-price">${(p.price * c.qty).toLocaleString('tr-TR')} TL</div>
+              <div class="cart-item-name">${c.name} ${sourceTag}</div>
+              <div class="cart-item-price">${((c.price || 0) * c.qty).toLocaleString('tr-TR')} TL</div>
             </div>
             <div class="cart-item-qty">
-              <button class="qty-btn" onclick="updateQty('${c.id}', -1)">&#8722;</button>
+              <button class="qty-btn" onclick="updateQty('${c.id}', '${c.source}', -1)">&#8722;</button>
               <span class="qty-num">${c.qty}</span>
-              <button class="qty-btn" onclick="updateQty('${c.id}', 1)" ${c.qty >= p.stock ? 'disabled' : ''}>+</button>
+              <button class="qty-btn" onclick="updateQty('${c.id}', '${c.source}', 1)">+</button>
             </div>
           </div>
         `;
@@ -1555,10 +1561,9 @@
 
       document.getElementById('cartTotal').textContent = total.toLocaleString('tr-TR') + ' TL';
 
-      let msg = 'Merhaba, aşağıdaki masa örtülerini sipariş vermek istiyorum:\n\n';
+      let msg = 'Merhaba, aşağıdaki ürünleri sipariş vermek istiyorum:\n\n';
       cart.forEach(c => {
-        const p = products.find(pr => pr.id === c.id);
-        msg += `\u2022 ${p.name} x${c.qty} \u2014 ${(p.price * c.qty).toLocaleString('tr-TR')} TL\n`;
+        msg += `\u2022 ${c.name} x${c.qty} \u2014 ${((c.price || 0) * c.qty).toLocaleString('tr-TR')} TL\n`;
       });
       msg += `\nToplam: ${total.toLocaleString('tr-TR')} TL`;
 
@@ -1613,26 +1618,19 @@
 
     // ─── GO TO MAIN CART ───
     function goToMainCart() {
-      const cartData = cart.map(c => {
-        const p = products.find(pr => pr.id === c.id);
-        const sizeLabel = p.size === 'tek' ? 'Tek Ebat' : p.size.includes('Q') ? p.size.replace('Q', ' Yuvarlak') : p.size.replace('x', '×') + ' cm';
-        return {
-          id: p.id,
-          name: p.name + ' ' + sizeLabel,
-          price: p.price,
-          image: p.image,
-          size: sizeLabel,
-          qty: c.qty,
-          source: 'masaortu'
-        };
-      });
-      const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(cartData))));
-      window.location.href = 'https://telahome.store/sepet.html?import=' + encodeURIComponent(encoded);
+      window.location.href = 'https://telahome.store/sepet.html';
     }
 
-    // ─── INIT ───
+    // ─── INIT (load shared cart then render) ───
+    SharedCart.init(function() {
+      SharedCart.getItems().then(function(items) {
+        cart = items || [];
+        updateBadge();
+        renderProducts();
+        renderCart();
+      });
+    });
     renderProducts();
-    saveCart();
     renderCart();
     initObserver();
   </script>
