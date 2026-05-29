@@ -568,6 +568,45 @@
       transform: scale(1.06);
     }
 
+    .product-image-link {
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      inset: 0;
+    }
+
+    .product-name-link {
+      text-decoration: none;
+      color: inherit;
+    }
+    .product-name-link:hover .product-name {
+      color: var(--earth);
+    }
+
+    .product-image-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: repeating-linear-gradient(45deg, var(--sand) 0px, var(--sand) 10px, var(--cream) 10px, var(--cream) 20px);
+      color: var(--earth);
+      opacity: 0.7;
+    }
+    .product-image-placeholder svg {
+      width: 44px;
+      height: 44px;
+    }
+    .product-image-placeholder span {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+
     .product-stock-badge {
       position: absolute;
       top: 12px;
@@ -1250,6 +1289,7 @@
             <button class="filter-tab" data-filter="keten">Keten</button>
             <button class="filter-tab" data-filter="premium">Premium</button>
             <button class="filter-tab" data-filter="pano">Pano</button>
+            <button class="filter-tab" data-filter="musamba">Muşamba</button>
           </div>
         </div>
         <div class="filter-row">
@@ -1261,6 +1301,7 @@
             <button class="filter-tab" data-size="160x300">160x300</button>
             <button class="filter-tab" data-size="buyuk">350+</button>
             <button class="filter-tab" data-size="yuvarlak">Yuvarlak</button>
+            <button class="filter-tab" data-size="kucuk">Küçük Ebat</button>
             <button class="filter-tab" data-size="diger">Diğer</button>
           </div>
         </div>
@@ -1483,7 +1524,11 @@
       { id: 'angel-keten-160x400', name: 'Angel Keten', size: '160x400', desc: 'Premium keten kumaş, angel deseni.', price: 4455, image: 'https://fiskosteks.sercdn.com/resimler/med_ANGEL-KETEN-MASA-ORTUSU-69a7fa9b317fc_png.webp', category: 'keten', stock: 20 },
       // ── PANO ──
       { id: 'yakut-pano', name: 'Yakut Pano', size: 'tek', desc: 'Pano desen, renkli çiçek motifi.', price: 810, image: 'https://fiskosteks.sercdn.com/resimler/med_YAKUT-PANO-MASA-ORTUSU-69cd2fdfa5549_png.webp', category: 'pano', stock: 20 },
-      { id: 'elit-pano', name: 'Elit Pano', size: 'tek', desc: 'Pano desen, şık motifler.', price: 867, image: 'https://fiskosteks.sercdn.com/resimler/min_ELIT-PANO-MASA-ORTUSU-69a7f970a9026_png.webp', category: 'pano', stock: 20 }
+      { id: 'elit-pano', name: 'Elit Pano', size: 'tek', desc: 'Pano desen, şık motifler.', price: 867, image: 'https://fiskosteks.sercdn.com/resimler/min_ELIT-PANO-MASA-ORTUSU-69a7f970a9026_png.webp', category: 'pano', stock: 20 },
+      // ── MUŞAMBA — Beyaz dantel desenli, sıvı geçirmez, silinebilir, çift taraflı ──
+      { id: 'musamba-160q', name: 'Dantel Muşamba Yuvarlak', size: '160Q', desc: 'Beyaz dantel desenli. Delikli yüzey şeffaf kaplamadır — sıvı geçirmez, silinebilir.', price: 550, image: 'images/musamba/musamba.jpg', category: 'musamba', stock: 20, url: 'urun/musamba-160q.html' },
+      { id: 'musamba-120x150', name: 'Dantel Muşamba', size: '120x150', desc: 'Beyaz dantel desenli. Delikli yüzey şeffaf kaplamadır — sıvı geçirmez, silinebilir.', price: 500, image: 'images/musamba/musamba-120x150.webp', category: 'musamba', stock: 20, url: 'urun/musamba-120x150.html' },
+      { id: 'musamba-140x180', name: 'Dantel Muşamba', size: '140x180', desc: 'Beyaz dantel desenli. Delikli yüzey şeffaf kaplamadır — sıvı geçirmez, silinebilir.', price: 650, image: 'images/musamba/musamba-140x180.webp', category: 'musamba', stock: 20, url: 'urun/musamba-140x180.html' }
     ];
 
     // ─── CART STATE (shared across all telahome.store subdomains) ───
@@ -1510,12 +1555,22 @@
       }
     });
 
+    // ─── PLACEHOLDER SWAP (image 404 fallback) ───
+    window.swapToPlaceholder = function(img) {
+      const ph = document.createElement('div');
+      ph.className = 'product-image-placeholder';
+      ph.setAttribute('aria-label', 'Görsel yakında eklenecek');
+      ph.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Görsel yakında</span>';
+      img.replaceWith(ph);
+    };
+
     // ─── RENDER PRODUCTS ───
     function matchesSize(productSize, filterSize) {
       if (filterSize === 'all') return true;
       if (filterSize === 'buyuk') return ['350', '400', '450', '500', '160x350', '160x400', '160x450', '160x500'].some(s => productSize.includes(s));
       if (filterSize === 'yuvarlak') return productSize.includes('Q') || productSize.toLowerCase().includes('yuvarlak');
-      if (filterSize === 'diger') return productSize === 'tek' || productSize.includes('110x160');
+      if (filterSize === 'kucuk') return ['120x150', '140x180', '110x160'].includes(productSize);
+      if (filterSize === 'diger') return productSize === 'tek';
       return productSize === filterSize;
     }
 
@@ -1535,17 +1590,25 @@
         const remaining = p.stock - cartQty;
         const stockLabel = remaining <= 0 ? 'Tükendi' : 'Stokta';
         const stockClass = remaining <= 0 ? 'out' : '';
-        const categoryLabels = { jakarli: 'Jakarlı', keten: 'Keten', premium: 'Premium', pano: 'Pano' };
-        const sizeLabel = p.size === 'tek' ? 'Tek Ebat' : p.size.includes('Q') ? p.size.replace('Q', ' Yuvarlak') : p.size.replace('x', '×') + ' cm';
+        const categoryLabels = { jakarli: 'Jakarlı', keten: 'Keten', premium: 'Premium', pano: 'Pano', musamba: 'Muşamba' };
+        const sizeLabel = p.size === 'tek' ? 'Tek Ebat' : p.size.includes('Q') ? p.size.replace('Q', ' cm Yuvarlak') : p.size.replace('x', '×') + ' cm';
+        const placeholderSvg = `<div class="product-image-placeholder" aria-label="Görsel yakında eklenecek"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Görsel yakında</span></div>`;
+        const imageBlock = p.image
+          ? `<img src="${p.image}" alt="Masa Örtüsü - ${p.name} ${sizeLabel}" loading="lazy" onerror="window.swapToPlaceholder(this)">`
+          : placeholderSvg;
+        const imageWrap = p.url
+          ? `<a href="${p.url}" class="product-image-link" aria-label="${p.name} ${sizeLabel} detayı">${imageBlock}<span class="product-stock-badge ${stockClass}">${stockLabel}</span><span class="product-category-badge">${categoryLabels[p.category]}</span></a>`
+          : `${imageBlock}<span class="product-stock-badge ${stockClass}">${stockLabel}</span><span class="product-category-badge">${categoryLabels[p.category]}</span>`;
+        const nameBlock = p.url
+          ? `<a href="${p.url}" class="product-name-link"><div class="product-name">${p.name}</div></a>`
+          : `<div class="product-name">${p.name}</div>`;
         return `
           <div class="product-card fade-up">
             <div class="product-image-wrap">
-              <img src="${p.image}" alt="Masa Örtüsü - ${p.name} ${sizeLabel}" loading="lazy">
-              <span class="product-stock-badge ${stockClass}">${stockLabel}</span>
-              <span class="product-category-badge">${categoryLabels[p.category]}</span>
+              ${imageWrap}
             </div>
             <div class="product-info">
-              <div class="product-name">${p.name}</div>
+              ${nameBlock}
               <div class="product-size">${sizeLabel}</div>
               <div class="product-desc">${p.desc}</div>
               <div class="product-bottom">
@@ -1569,7 +1632,7 @@
       const currentQty = inCart ? inCart.qty : 0;
       if (currentQty >= p.stock) return;
 
-      const sizeLabel = p.size === 'tek' ? 'Tek Ebat' : p.size.includes('Q') ? p.size.replace('Q', ' Yuvarlak') : p.size.replace('x', '×') + ' cm';
+      const sizeLabel = p.size === 'tek' ? 'Tek Ebat' : p.size.includes('Q') ? p.size.replace('Q', ' cm Yuvarlak') : p.size.replace('x', '×') + ' cm';
 
       if (inCart) {
         inCart.qty++;
