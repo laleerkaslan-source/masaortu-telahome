@@ -35,6 +35,12 @@
         items: [{ item_id: P.id, item_name: P.name, price: P.price, quantity: 1, item_category: 'Masa Örtüsü' }]
       });
     }
+    if (typeof fbq === 'function') {
+      fbq('track', 'AddToCart', {
+        content_ids: [P.id], content_name: P.name,
+        content_type: 'product', value: P.price, currency: 'TRY'
+      });
+    }
   }
   window.addToCart = addToCart;
 
@@ -150,11 +156,17 @@
   window.closeCart = closeCart;
 
   window.goToMainCart = function() {
+    const total = cart.reduce((s, c) => s + (c.price || 0) * c.qty, 0);
     if (typeof gtag === 'function') {
-      const total = cart.reduce((s, c) => s + (c.price || 0) * c.qty, 0);
       gtag('event', 'begin_checkout', {
         currency: 'TRY', value: total,
         items: cart.map(c => ({ item_id: c.id, item_name: c.name, price: c.price, quantity: c.qty, item_category: 'Masa Örtüsü' }))
+      });
+    }
+    if (typeof fbq === 'function') {
+      fbq('track', 'InitiateCheckout', {
+        content_ids: cart.map(c => c.id), value: total,
+        currency: 'TRY', num_items: cart.reduce((s, c) => s + c.qty, 0)
       });
     }
     if (cart.length === 0) {
@@ -184,6 +196,12 @@
           gtag('event', 'view_item', {
             currency: 'TRY', value: P.price,
             items: [{ item_id: P.id, item_name: P.name, price: P.price, quantity: 1, item_category: 'Masa Örtüsü' }]
+          });
+        }
+        if (typeof fbq === 'function') {
+          fbq('track', 'ViewContent', {
+            content_ids: [P.id], content_name: P.name,
+            content_type: 'product', value: P.price, currency: 'TRY'
           });
         }
       });
